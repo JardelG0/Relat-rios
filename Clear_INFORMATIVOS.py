@@ -15,4 +15,4 @@ for i in range(len(inf_18)):
     inf_18.loc[i, 'DIAS'] = inf_18['DIAS'][i][2:]
 inf_18.to_excel('INFORMATIVO 18° GRE.xlsx', index=False)
 
-print('\n\tPRONTINHO!\n')
+print('\n\t! PRONTINHO !\n')
