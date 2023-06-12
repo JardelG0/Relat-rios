@@ -4,3 +4,5 @@
 git reset '.\18° GRE\.'
 
 git reset '.\5° GRE\.'
+
+git reset '.\16° GRE\.'
