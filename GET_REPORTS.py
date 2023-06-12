@@ -12,8 +12,8 @@ import os
 
 
 def login():
-    driver.find_element(By.NAME, "user").send_keys("gsrastreamento")
-    driver.find_element(By.NAME, "password").send_keys("gsrastreamento")
+    driver.find_element(By.NAME, "user").send_keys(log)
+    driver.find_element(By.NAME, "password").send_keys(passw)
     driver.find_element(By.NAME, "password").send_keys(Keys.RETURN)
     time.sleep(0.5)
     driver.find_element(By.XPATH, "/html/body/div[3]/div/div[1]/div/div[4]/div/ul/li[2]/a").send_keys(Keys.RETURN)
@@ -21,19 +21,34 @@ def login():
 
 def dataHora(data_hora_ini, data_hora_fin):
     time.sleep(1)
-    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input").send_keys(Keys.RETURN)
-    i = 0
-    while i < 14:
-        i+=1
-        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input").send_keys(Keys.BACKSPACE)
-    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input").send_keys(data_hora_ini)
+    if plat == "GS": 
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input").send_keys(Keys.RETURN)
+        i = 0
+        while i < 14:
+            i+=1
+            driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input").send_keys(Keys.BACKSPACE)
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input").send_keys(data_hora_ini)
 
-    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/input").send_keys(Keys.RETURN)
-    i = 0
-    while i < 14:
-        i+=1
-        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/input").send_keys(Keys.BACKSPACE)
-    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/input").send_keys(data_hora_fin)
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/input").send_keys(Keys.RETURN)
+        i = 0
+        while i < 14:
+            i+=1
+            driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/input").send_keys(Keys.BACKSPACE)
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/input").send_keys(data_hora_fin)
+    elif plat == "MV": 
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input").send_keys(Keys.RETURN)
+        i = 0
+        while i < 14:
+            i+=1
+            driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input").send_keys(Keys.BACKSPACE)
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input").send_keys(data_hora_ini)
+
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/input").send_keys(Keys.RETURN)
+        i = 0
+        while i < 14:
+            i+=1
+            driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/input").send_keys(Keys.BACKSPACE)
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/input").send_keys(data_hora_fin)
 
 
 def placa(ind):
@@ -44,9 +59,13 @@ def placa(ind):
     print('\t===> ', dados['GRE'][ind])
     print('\tDia:', data[:2] + '/' + data[2:4])
     print('\tFalta:', qtd-1, '\n')
-    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[1]/div[2]/div/div[3]/div/span/span[1]/span").send_keys(Keys.RETURN)
+    if plat == 'GS':
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[1]/div[2]/div/div[3]/div/span/span[1]/span").send_keys(Keys.RETURN)
+    elif plat == 'MV':
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[1]/div[2]/div/div[3]/div/span/span[1]/span").send_keys(Keys.RETURN)
     driver.find_element(By.XPATH, "/html/body/span/span/span[1]/input").send_keys(dados['PLACA'][ind][-6:])
     driver.find_element(By.XPATH, "/html/body/span/span/span[1]/input").send_keys(Keys.RETURN)
+
 
 
 def informativo(ind, inform):
@@ -71,20 +90,38 @@ def informativo(ind, inform):
                 x = str(val) + ', ' + y
                 informativo_18.loc[i, 'DIAS'] = x
                 informativo_18.to_excel(dir_inf, index=False)
+    elif dados['GRE'][ind] == '16°':
+        dir_inf += "\\INFORMATIVO 16° GRE.xlsx"
+        informativo_16 = pd.read_excel(dir_inf, sheet_name="Sheet1")
+        for i in range(len(informativo_16)):
+            if dados['PLACA'][ind] == informativo_16['PLACA'][i] and dados['TURNO'][ind] == informativo_16['TURNO'][i] and informativo_16['ROTA'][i] == inform:
+                val = informativo_16['DIAS'][i]
+                y = data[:2]
+                x = str(val) + ', ' + y
+                informativo_16.loc[i, 'DIAS'] = x
+                informativo_16.to_excel(dir_inf, index=False)
 
 
 def index(i):
     placa(i)
 
-    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[3]/button[2]").click()
-
-    # 
-    driver.implicitly_wait(300)
-    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/div[1]/div[2]/li[3]/b")
-    time.sleep(1.5)
-    #.until(lambda driver: if driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/div[1]/div[2]/li[3]/text()" != ""))
+    # Espera para saber se tem rota e ver se o km da pra tirar o arquivo ou não
+    if plat == "GS":
+        # pega um elemento não carregado ainda só pra esperar os dados da rota aparecer
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[3]/button[2]").click()
+        driver.implicitly_wait(300)
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/div[1]/div[2]/li[3]/b")
+        time.sleep(1.5)
     
-    element = driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/div[2]/div[2]/div[1]/div/a")
+        element = driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/div[2]/div[2]/div[1]/div/a")
+    elif plat == "MV":
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[3]/button").click()
+        driver.implicitly_wait(300)
+        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/div[1]/div[2]/li[1]/b")
+        time.sleep(1.5)
+    
+        element = driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/div[2]/div[2]/div[1]/div/a")
+
     if element.text == '':
         informativo(i, 'NÃO APRESENTA ROTA')
         print('\nNÃO APRESENTA ROTA\n')
@@ -105,6 +142,9 @@ def index(i):
             driver.back()
             return True
         else:
+            if plat == "MV":
+                driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/div[3]/div[2]/div[1]/label[1]/input").click()
+
             permi = True
             while permi:
                 x = str(input('Next[N] | Print[P] | Close[C]\n>_'))
@@ -116,6 +156,8 @@ def index(i):
                         dir_arq += '\\5° GRE\\'
                     elif dados['GRE'][i] == '18°':
                         dir_arq += '\\18° GRE\\'
+                    elif dados['GRE'][i] == '16°':
+                        dir_arq += '\\16° GRE\\'
                     dir_arq += dados['MUNICIPIO'][i] +'\\'+ dados['PLACA'][i]+ ' ' + dados['TURNO'][i][0] + ' ' + data[:2] + '.pdf'
 
                     # printar o arq e mandar para o diretório criado acima
@@ -138,6 +180,14 @@ def index(i):
                 else: 
                     print('Valor inválido\n')
 
+
+log = str(input("\nLogin:\n>_"))
+passw = str(input("\nPassword:\n>_"))
+
+if log[:2] == 'gs':
+    plat = 'GS'
+elif log[:2] == 'ma':
+    plat = 'MV'
 
 h_inicial = ''
 h_final = ''
@@ -195,8 +245,8 @@ login()
 
 # Ler o arquivo contendo as placas, turnos e etc...
 dir_dados = os.getcwd()
-dir_dados += '\\dados_5_18_GRE.xlsx'
-dados = pd.read_excel(dir_dados, sheet_name="5 e 18 GRE")
+dir_dados += '\\dados_5_16_18_GRE.xlsx'
+dados = pd.read_excel(dir_dados, sheet_name="5, 16 e 18 GRE")
 
 # Contar a quantidade de rotas do turno.
 # Quando não for rodas todas as placas aqui pega o índice da placa escolhida e conta as rotas restantes.
@@ -211,11 +261,11 @@ if Start == 2:
         if j < plac_ind:
             pass
         else:
-            if dados['TURNO'][j] == Turno:
+            if dados['TURNO'][j] == Turno and dados['PLATAFORMA'][i] == plat:
                 qtd += 1
 else:
     for i in range(len(dados)):
-        if dados['TURNO'][i] == Turno:
+        if dados['TURNO'][i] == Turno and dados['PLATAFORMA'][i] == plat:
             qtd += 1
 
 # Corpo principal: Horário e troca de rotas
@@ -229,7 +279,7 @@ for i in range(len(dados)):
         if i < plac_ind:
             pass
         else:
-            if dados['TURNO'][i][0] == Turno[0] and perm:
+            if dados['TURNO'][i][0] == Turno[0] and dados['PLATAFORMA'][i] == plat and perm:
                 if qtd_rota == 0:
                     dataHora(dataHoraInicial, dataHoraFinal)
                     driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
@@ -239,10 +289,13 @@ for i in range(len(dados)):
                     perm = index(i)
                 qtd -= 1
     else:
-        if dados['TURNO'][i][0] == Turno[0] and perm:
+        if dados['TURNO'][i][0] == Turno[0] and dados['PLATAFORMA'][i] == plat and perm:
             if qtd_rota == 0:
                 dataHora(dataHoraInicial, dataHoraFinal)
-                driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
+                if plat == 'GS':
+                    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
+                elif plat == 'MV':
+                    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
                 perm = index(i)
                 qtd_rota = 1
             elif qtd_rota > 0:
