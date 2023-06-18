@@ -181,6 +181,8 @@ def index(i):
                     print('Valor inválido\n')
 
 
+print('\n\t==> ! WELCOME ! <==\n\n\t JÁ DEU O GIT PULL?')
+
 log = str(input("\nLogin:\n>_"))
 passw = str(input("\nPassword:\n>_"))
 
@@ -188,9 +190,6 @@ if log[:2] == 'gs':
     plat = 'GS'
 elif log[:2] == 'ma':
     plat = 'MV'
-
-h_inicial = ''
-h_final = ''
 
 pe = True
 while pe:
@@ -257,12 +256,10 @@ if Start == 2:
     for i in range(len(dados)):
         if dados['PLACA'][i] == plac.upper() and dados['TURNO'][i] == Turno:
             plac_ind = i
+            break
     for j in range(len(dados)):
-        if j < plac_ind:
-            pass
-        else:
-            if dados['TURNO'][j] == Turno and dados['PLATAFORMA'][i] == plat:
-                qtd += 1
+        if j >= plac_ind and dados['TURNO'][j] == Turno and dados['PLATAFORMA'][j] == plat:
+            qtd += 1
 else:
     for i in range(len(dados)):
         if dados['TURNO'][i] == Turno and dados['PLATAFORMA'][i] == plat:
@@ -276,18 +273,18 @@ dataHoraFinal = data + h_final
 
 for i in range(len(dados)):
     if Start == 2:
-        if i < plac_ind:
-            pass
-        else:
-            if dados['TURNO'][i][0] == Turno[0] and dados['PLATAFORMA'][i] == plat and perm:
-                if qtd_rota == 0:
-                    dataHora(dataHoraInicial, dataHoraFinal)
+        if i >= plac_ind and dados['TURNO'][i][0] == Turno[0] and dados['PLATAFORMA'][i] == plat and perm:
+            if qtd_rota == 0:
+                dataHora(dataHoraInicial, dataHoraFinal)
+                if plat == 'GS':
                     driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
-                    perm = index(i)
-                    qtd_rota = 1
-                elif qtd_rota > 0:
-                    perm = index(i)
-                qtd -= 1
+                elif plat == 'MV':
+                    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
+                perm = index(i)
+                qtd_rota = 1
+            elif qtd_rota > 0:
+                perm = index(i)
+            qtd -= 1
     else:
         if dados['TURNO'][i][0] == Turno[0] and dados['PLATAFORMA'][i] == plat and perm:
             if qtd_rota == 0:
@@ -302,4 +299,4 @@ for i in range(len(dados)):
                 perm = index(i)
             qtd -= 1
 
-print('\n! TURNO COMPLETO !\n')
+print('\n\n! TURNO COMPLETO !\n\n\tDÊ O GIT PUSH')
