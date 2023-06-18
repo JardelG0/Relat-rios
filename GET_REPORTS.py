@@ -299,4 +299,4 @@ for i in range(len(dados)):
                 perm = index(i)
             qtd -= 1
 
-print('\n\n! TURNO COMPLETO !\n\n\tDÊ O GIT PUSH')
+print('\n\t! TURNO COMPLETO !\n\n\tDÊ O GIT PUSH')
