@@ -1,4 +1,9 @@
 # Relat-rios
+
+==> Adicionar ao stage só os arquivos modificados
+
+git add -u
+
 ==> Colocar . no fim do diretório para remover a pasta da stage area <===
 
 git reset '.\18° GRE\.'
