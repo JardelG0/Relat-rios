@@ -109,19 +109,51 @@ def index(i):
     if plat == "GS":
         # pega um elemento não carregado ainda só pra esperar os dados da rota aparecer
         driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[3]/button[2]").click()
-        driver.implicitly_wait(300)
-        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/div[1]/div[2]/li[3]/b")
-        time.sleep(1.5)
-    
-        element = driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/div[2]/div[2]/div[1]/div/a")
+        p = True
+        while p:
+            driver.implicitly_wait(300)
+            plac_plataf = driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/div[1]/div[2]/li[3]")
+            time.sleep(1.5)
+            if plac_plataf.text[-7:] == dados['PLACA'][i][-7:]:
+                element = driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/div[2]/div[2]/div[1]/div/a")
+                p = False
+            else:
+                p2 = True
+                while p2:
+                    bo = int(input("\n\t! ERRO NAS PLACAS !\n\nTry again[1]\nNext Route[2]\n>_"))
+                    if bo == 1:
+                        p = True
+                    elif bo == 2:
+                        print('\n\tNext Route!')
+                        driver.back()
+                        permi = False
+                        return True
+                    else:
+                        print('Valor inválido\n')
     elif plat == "MV":
         driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[3]/button").click()
-        driver.implicitly_wait(300)
-        driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/div[1]/div[2]/li[1]/b")
-        time.sleep(1.5)
+        p = True
+        while p:
+            driver.implicitly_wait(300)
+            plac_plataf = driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/div[1]/div[2]/li[3]")
+            time.sleep(1.5)
+            if plac_plataf.text[-7:] == dados['PLACA'][i][-7:]:
+                element = driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/div[2]/div[2]/div[1]/div/a")
+                p = False
+            else:
+                p2 = True
+                while p2:
+                    bo = int(input("\n\t! ERRO NAS PLACAS !\n\nTry again[1]\nNext Route[2]\n>_"))
+                    if bo == 1:
+                        p = True
+                    elif bo == 2:
+                        print('\n\tNext Route!')
+                        driver.back()
+                        permi = False
+                        return True
+                    else:
+                        print('Valor inválido\n')
     
-        element = driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/div[2]/div[2]/div[1]/div/a")
-
     if element.text == '':
         informativo(i, 'NÃO APRESENTA ROTA')
         print('\nNÃO APRESENTA ROTA\n')

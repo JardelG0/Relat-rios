@@ -12,6 +12,7 @@ def main():
                     inf_5.loc[i, 'DIAS'] = inf_5['DIAS'][i][2:]
                 inf_5.to_excel('INFORMATIVO 5° GRE.xlsx', index=False)
                 print("\n\t ! INFORMATIVO 5° GRE ready !")
+
             except:
                 print('\n\t! INFORMATIVO 5° GRE already updated !\n')
 
@@ -32,8 +33,10 @@ def main():
                     inf_18.loc[i, 'DIAS'] = inf_18['DIAS'][i][2:]
                 inf_18.to_excel('INFORMATIVO 18° GRE.xlsx', index=False)
                 print("\n\t ! INFORMATIVO 18° GRE ready !")
+                perm = False
             except:
                 print('\n\t! INFORMATIVO 18° GRE already updated !\n')
+                perm = False
         elif alert.upper() == "N": 
             print("\n\t! OPERAÇÃO ABORTADA !\n")
             perm = False
