@@ -120,13 +120,13 @@ def index(i):
             else:
                 p2 = True
                 while p2:
-                    bo = int(input("\n\t! ERRO NAS PLACAS !\n\nTry again[1]\nNext Route[2]\n>_"))
-                    if bo == 1:
-                        p = True
-                    elif bo == 2:
+                    bo = str(input("\n\t! ERRO NAS PLACAS !\n\nTry again[T]\nNext Route[N]\n>_"))
+                    if bo.upper() == 'T':
+                        p2 = False
+                    elif bo.upper() == 'N':
                         print('\n\tNext Route!')
                         driver.back()
-                        permi = False
+                        p2 = False
                         return True
                     else:
                         print('Valor inválido\n')
@@ -143,13 +143,13 @@ def index(i):
             else:
                 p2 = True
                 while p2:
-                    bo = int(input("\n\t! ERRO NAS PLACAS !\n\nTry again[1]\nNext Route[2]\n>_"))
-                    if bo == 1:
-                        p = True
-                    elif bo == 2:
+                    bo = str(input("\n\t! ERRO NAS PLACAS !\n\nTry again[T]\nNext Route[N]\n>_"))
+                    if bo.upper() == 'T':
+                        p2 = False
+                    elif bo.upper() == 'N':
                         print('\n\tNext Route!')
                         driver.back()
-                        permi = False
+                        p = False
                         return True
                     else:
                         print('Valor inválido\n')
@@ -174,6 +174,7 @@ def index(i):
             driver.back()
             return True
         else:
+            # ATIVAR O PRINT DO MAPA NA MARVÃO
             if plat == "MV":
                 driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/div[3]/div[2]/div[1]/label[1]/input").click()
 
@@ -183,7 +184,6 @@ def index(i):
                 if x.upper() == 'P':
                     # Pegar o diretório e concatenar com o diretório do arq juntamente com o próprio arq a ser gerado
                     dir_arq = os.getcwd()
-                    gre = ''
                     if dados['GRE'][i] == '5°':
                         dir_arq += '\\5° GRE\\'
                     elif dados['GRE'][i] == '18°':
@@ -298,37 +298,29 @@ else:
             qtd += 1
 
 # Corpo principal: Horário e troca de rotas
-qtd_rota = 0
-perm = True
 dataHoraInicial = data + h_inicial
 dataHoraFinal = data + h_final
 
+dataHora(dataHoraInicial, dataHoraFinal)
+if plat == 'GS':
+    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
+elif plat == 'MV':
+    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
+
+qtd_rota = 0
+perm = True
+
 for i in range(len(dados)):
-    if Start == 2:
-        if i >= plac_ind and dados['TURNO'][i][0] == Turno[0] and dados['PLATAFORMA'][i] == plat and perm:
-            if qtd_rota == 0:
-                dataHora(dataHoraInicial, dataHoraFinal)
-                if plat == 'GS':
-                    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
-                elif plat == 'MV':
-                    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
+    if perm:
+        if Start == 2:
+            if i >= plac_ind and dados['TURNO'][i][0] == Turno[0] and dados['PLATAFORMA'][i] == plat:
                 perm = index(i)
-                qtd_rota = 1
-            elif qtd_rota > 0:
+                qtd -= 1
+        else:
+            if dados['TURNO'][i][0] == Turno[0] and dados['PLATAFORMA'][i] == plat:
                 perm = index(i)
-            qtd -= 1
+                qtd -= 1
     else:
-        if dados['TURNO'][i][0] == Turno[0] and dados['PLATAFORMA'][i] == plat and perm:
-            if qtd_rota == 0:
-                dataHora(dataHoraInicial, dataHoraFinal)
-                if plat == 'GS':
-                    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[13]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
-                elif plat == 'MV':
-                    driver.find_element(By.XPATH, "/html/body/div[3]/div/div[12]/form/div[1]/div[2]/div[3]/div[2]/div[11]/div/div[4]/label/div/ins").click()
-                perm = index(i)
-                qtd_rota = 1
-            elif qtd_rota > 0:
-                perm = index(i)
-            qtd -= 1
+        break
 
 print('\n\t! TURNO COMPLETO !\n\n\tDÊ O GIT PUSH')
