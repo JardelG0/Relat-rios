@@ -1,6 +1,6 @@
 # Relat-rios
 
-==> Adicionar ao stage só os arquivos modificados
+==> Adicionar ao stage só os arquivos modificados <==
 
 git add -u
 
@@ -14,7 +14,7 @@ git reset '.\5° GRE\.'
 git reset '.\16° GRE\.'
 
 
-==> install pack:
+==> install pack <==
 
 selenium
 
@@ -25,6 +25,6 @@ pandas
 openpyxl
 
 
-==> On Linux
+==> On Linux <==
 
 Alterar os diretórios
