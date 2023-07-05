@@ -15,7 +15,16 @@ git reset '.\16° GRE\.'
 
 
 ==> install pack:
+
 selenium
+
 webdriver_manager
+
 pandas
+
 openpyxl
+
+
+==> On Linux
+
+Alterar os diretórios
